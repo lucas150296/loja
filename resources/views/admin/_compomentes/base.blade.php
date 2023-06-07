@@ -24,9 +24,9 @@
                         Cadastro
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="{{route('produto.create')}}">Produtos</a>
-                      <a class="dropdown-item" href="{{route('produto.create')}}">cliente</a>
-                      <a class="dropdown-item" href="{{route('produto.create')}}">Fornecedores</a>
+                      <a class="dropdown-item" href link-nav="{{route('produto.create')}}">Produtos</a>
+                      <a class="dropdown-item" href="#" wm-nav="{{route('produto.create')}}">cliente</a>
+                      <a class="dropdown-item" href="#" wm-nav="{{route('produto.create')}}">Fornecedores</a>
                     </div>
                   </li>
                 <li class="nav-item">
@@ -72,7 +72,7 @@
     </nav>
 
     <div id="conteudo">
-
+        @yield('conteudo')
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

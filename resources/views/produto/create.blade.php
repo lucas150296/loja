@@ -1,122 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
-
-<body>
-
+@extends('admin._compomentes.base')
+@section('conteudo')
     <div class="cadastro-e-editar">
-        <p><img src="imagens/codigo de barra.png" alt="">Cadastro de produto</p>
-        <p><img src="imagens/codigo de barra.png" alt="">Editar Produto</p>
-        <nav class="navbar navbar-light bg-light" style="background-color: aqua">
-            <form class="form-inline" >
-                <input class="form-control mr-sm-2" type="search" placeholder="Código / Código Barras">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="imagens/binoculos.png"
-                        alt="" class="pesquisa"> Pesquisa</button>
-            </form>
-        </nav>
+        @if (isset($produto->id))
+            <p><img src="{{ asset('imagens/codigo de barra.png') }}" alt="">Editar Produto</p>
+        @else
+            <p><img src="{{ asset('imagens/codigo de barra.png') }}" alt="">Cadastro de produto</p>
+        @endif
+
+
         <hr>
 
-        <form>
-            <div class="row">
-                <div class="col">
-                    <label for="formGroupExampleInput">Código</label>
-                    <input type="text" class="form-control" placeholder="Código">
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Cód.barras</label>
-                    <input type="text" class="form-control" placeholder="Sobrenome">
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Setor</label>
-                    <select class="form-control">
-                        <option>Select padrão</option>
-                        <option value="">Cozinha</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Status</label>
-                    <select class="form-control">
-                        <option>Select padrão</option>
-                        <option value="">Ativo</option>
-                        <option value="">Inativo</option>
-                    </select>
-                </div>
+        @if (isset($produto->id))
+            <form name="cadastro" action="{{ route('produto.update', ['produto' => $produto->id]) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+            @else
+                <form name='cadastro' method="POST" action="{{ route('produto.store') }}" enctype="multipart/form-data">
+                    @csrf
+        @endif
+
+        <div class="row">
+            <div class="col">
+                <label for="formGroupExampleInput">Código</label>
+                <input name="codigo" type="text" class="form-control" placeholder="Código"
+                    value="{{ $produto->codigo ?? old('codigo') }}" required>
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="formGroupExampleInput">Nome Produto</label>
-                    <input type="text" class="form-control" placeholder="Nome Produto">
-                </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Cód.barras</label>
+                <input name="cod_barras" type="text" class="form-control" placeholder="Cod.barras"
+                    value="{{ $produto->cod_barras ?? old('cod_barras') }}">
             </div>
-            <div class="row">
-                <div class="col">
-                    <label for="formGroupExampleInput">Preço</label>
-                    <input type="" class="form-control" placeholder="Preço">
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Custo</label>
-                    <input type="" class="form-control" placeholder="Custo">
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Tipo Cadastro</label>
-                    <select class="form-control">
-                        <option>Select padrão</option>
-                        <option value="">Revenda</option>
-                        <option value="">Usu</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Disponível P/Venda</label>
-                    <select class="form-control">
-                        <option>Select padrão</option>
-                        <option value="">Sim</option>
-                        <option value="">Nao</option>
-                    </select>
-                </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Setor</label>
+                <select name="setor_id" class="form-control" required>
+                    <option>Escola</option>
+                    @foreach ($setores as $key => $setor)
+                        <option value="{{ $setor->id }}"
+                            {{ ($produto->setor_id ?? old('setor_id')) == $setor->id ? 'selected' : '' }}>
+                            {{ $setor->name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Status</label>
+                <select name="status" class="form-control" required>
+                    <option value="">opção</option>
+                    <option value="1">Ativo</option>
+                    <option value="0">Inativo</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="formGroupExampleInput">Nome Produto</label>
+                <input name="nome" type="text" class="form-control" placeholder="Nome Produto"
+                    value="{{ $produto->nome ?? old('nome') }}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="formGroupExampleInput">Preço</label>
+                <input name="valor" type="" class="form-control" placeholder="Preço"
+                    value="{{ $produto->valor ?? old('valor') }}" required>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Custo</label>
+                <input name="custo" type="" class="form-control" placeholder="custo"
+                    value="{{ $produto->custo ?? old('custo') }}" required>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Tipo Cadastro</label>
+                <select name="tipo_Cadastro" class="form-control" required>
+                    <option value="">opção</option>
+                    <option value="0">Revenda</option>
+                    <option value="1">Usu</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Disponível P/Venda</label>
+                <select name="disponivel_venda" class="form-control" required>
+                    <option value="">opção</option>
+                    <option value="1">Sim</option>
+                    <option value="0">Nao</option>
+                </select>
+            </div>
 
 
+        </div>
+        <div class="row" style="margin: 13px;">
+            <div class="col">
+                <label class="formGroupExampleInput">Destaque</label>
+                <select name="destaque" class="from-control" required>
+                    <option value="">opção</option>
+                    <option value="1">Ativo</option>
+                    <option value="0">Desativo</option>
+                </select>
             </div>
-            <div class="row" style="margin: 13px;">
-                <div class="col">
-                    <input type="checkbox" class="form-check-input " id="exampleCheck1">
-                    <label class="form-check-label" for="formGroupExampleInput">Destaque</label>
+            <div class="col">
+                <label class="formGroupExampleInput">Oferta</label>
+                <select name="oferta" id="oferta" class="from-control" onchange="checarOferta(this.value)" required>
+                    <option value="">opção</option>
+                    <option value="1">Ativo</option>
+                    <option value="0">Desativo</option>
+                </select>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Valor Desconto %</label>
+                <input name="valorDesconto" type="" class="form-control ofertas" placeholder="Valor Desconto %"
+                    disabled value="{{ $produto->valor_desconto ?? old('valor_desconto') }}">
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Data de fim da oferta</label>
+                <input name="data_f_oferta" type="date" class="form-control ofertas " placeholder="" disabled
+                    value="{{ $produto->data_f_oferta ?? old('data_f_oferta') }}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Imagem Produto</label>
+                    <input name="imagem" type="file" class="form-control-file" id="exampleFormControlFile1">
+                    @if (isset($produto->id))
+                        <input name="imagemCapa" type="text" value="{{ $produto->imagemCapa ?? old('imagemCapa') }}">
+                    @else
+
+                    @endif
                 </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input " id="exampleCheck1">
-                    <label class="form-check-label" for="formGroupExampleInput">Oferta</label>
-                </div>
-                <div class="col">
-                    <label for="formGroupExampleInput">Valor Desconto %</label>
-                    <input type="" class="form-control" placeholder="Valor Desconto %">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrição</label>
+                    <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Confirmar</button>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Confirmar</button>
         </form>
 
     </div>
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+@endsection

@@ -106,3 +106,14 @@ a:hover {
 .cadastro-e-editar form{
     margin: 25px;
 }
+nav{
+    padding: 0;
+}
+.imgMedida{
+    height: 50%;
+    width: 50%;
+    background-color: aliceblue;
+}
+.pesquisa{
+    margin: 10px;
+}

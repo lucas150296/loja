@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Setor;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class ProdutoController extends Controller
 {
@@ -12,9 +14,10 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $produtos = Produto::all();
+        return view('produto.lista', ['produtos' => $produtos]);
     }
 
     /**
@@ -24,7 +27,8 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('produto.create');
+        $setores = Setor::all();
+        return view('produto.create', ['setores' => $setores]);
     }
 
     /**
@@ -35,7 +39,16 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        Produto::create($request->all());
+        $produto = $request->all();
+
+        if ($request->hasFile('imagem')) {
+            $fileName = $request->file('imagem')->getClientOriginalName();
+            $request->imagem->move(public_path('imagens'), $fileName);
+            $produto['imagemCapa'] = $fileName;
+        }
+        Produto::create($produto);
+
+        return redirect()->route('admin');
     }
 
     /**
@@ -46,7 +59,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        return view(('produto.lista'));
     }
 
     /**
@@ -57,7 +70,8 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        $setores = Setor::all();
+        return view('produto.create', ['produto' => $produto, 'setores' => $setores]);
     }
 
     /**
@@ -69,7 +83,13 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        if ($request->hasFile('imagem')) {
+            $fileName = $request->file('imagem')->getClientOriginalName();
+            $request->imagem->move(public_path('imagens'), $fileName);
+            $produto['imagemCapa'] = $fileName;
+        }
+        $produto->update($request->all());
+        return redirect()->route('admin');
     }
 
     /**
@@ -80,6 +100,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+        return redirect()->route('admin');
     }
+
 }

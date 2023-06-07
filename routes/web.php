@@ -22,3 +22,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'IndexController@index')->name('home');
 Route::get('/admin', 'IndexController@admin')->name('admin');
 Route::resource('/produto', 'ProdutoController');
+

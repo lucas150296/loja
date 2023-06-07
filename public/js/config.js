@@ -1,9 +1,10 @@
-document.querySelectorAll('[link]').forEach(link => {
+document.querySelectorAll('[link-nav]').forEach(link => {
     const conteudo = document.getElementById('conteudo')
+        console.log(link.getAttribute('link-nav'))
 
-    link.onclik = function(e) {
+    link.onclick = function(e) {
         e.preventDefault()
-        fetch(link.getAttribute('link'))
+        fetch(link.getAttribute('link-nav'))
             .then(resp => resp.text())
             .then(html => conteudo.innerHTML = html)
     }
