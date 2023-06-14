@@ -25,7 +25,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="{{route('produto.create')}}">Produtos</a>
-                      <a class="dropdown-item" href="{{route('produto.create')}}">cliente</a>
+                      <a class="dropdown-item" href="{{route('cliente.create')}}">cliente</a>
                       <a class="dropdown-item" href="{{route('produto.create')}}">Fornecedores</a>
                     </div>
                   </li>

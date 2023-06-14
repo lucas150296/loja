@@ -117,3 +117,15 @@ nav{
 .pesquisa{
     margin: 10px;
 }
+.conteudo{
+    margin: 5px;
+    border: solid 1px black;
+}
+.conteudo label{
+    margin: 5px;
+}
+.padding-0{
+    padding: 0;
+}.form-row{
+    margin: 3px;
+}
