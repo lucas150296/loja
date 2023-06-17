@@ -60,7 +60,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('cliente.create_edite' , ['cliente' => $cliente]);
     }
 
     /**

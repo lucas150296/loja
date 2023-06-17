@@ -89,46 +89,46 @@
                         <label for="inputEmail4">pessoa</label>
                         <div class="form-check form-check-inline">
                             <input name="tipo_documento" class="form-check-input" type="radio" name="pessoa" id="inlineRadio1"
-                                value="cpf">
+                                value="cpf" {{($cliente->tipo_documento == "cpf") ? "checked" : null}}>
                             <label class="form-check-label" for="inlineRadio1">CPF</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input name="tipo_documento" class="form-check-input" type="radio" name="pessoa" id="inlineRadio2"
-                                value="cnpj">
+                                value="cnpj" {{($cliente->tipo_documento == "cnpj") ? "checked" : null}}>
                             <label class="form-check-label" for="inlineRadio2">CNPJ</label>
                         </div>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="">CPF/CNPJ</label>
-                        <input name="documento" type="text" class="form-control" placeholder="CPF/CNPJ" required>
+                        <input name="documento" type="text" class="form-control" placeholder="CPF/CNPJ" required value="{{$cliente->documento ?? old('documento')}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Nome</label>
-                        <input name="nome" type="text" class="form-control" placeholder="Nome">
+                        <input name="nome" type="text" class="form-control" placeholder="Nome" value="{{$cliente->nome}}">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="">Razão Social</label>
-                        <input name="razao_social" type="text" class="form-control" placeholder="Razão Social">
+                        <input name="razao_social" type="text" class="form-control" placeholder="Razão Social" value="{{$cliente->razao_social ?? old('raza_social')}}">
                     </div>
                     <!-- linha -->
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Celular</label>
-                        <input name="celular" type="text" class="form-control" placeholder="Celular" required>
+                        <input name="celular" type="text" class="form-control" placeholder="Celular" required value="{{$cliente->celular ?? old('celular')}}">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="">Data Nascimento</label>
-                        <input name="data_nascimento" type="date" class="form-control" placeholder="CPF/CNPJ" required>
+                        <input name="data_nascimento" type="date" class="form-control" placeholder="CPF/CNPJ" required value="{{$cliente->data_nascimento ?? old('data_nascimento')}}">
                     </div>
                     <div class="form-group col-md-2">
                         <label for="">Sexo</label>
                         <div class="form-check form-check-blok">
                             <input class="form-check-input" type="radio" name="sexo" id="inlineRadio1"
-                                value="masc">
+                                value="masc" {{ ($cliente->sexo == "masc") ? "checked" : null }}>
                             <label class="form-check-label" for="inlineRadio1">Masc</label>
                         </div>
                         <div class="form-check form-check-blok">
                             <input class="form-check-input" type="radio" name="sexo" id="inlineRadio2"
-                                value="fem">
+                                value="fem" {{ ($cliente->sexo == "fem") ? "checked" : null }} >
                             <label class="form-check-label" for="inlineRadio2">Fem</label>
                         </div>
                     </div>
@@ -136,12 +136,12 @@
                         <label for="">Categoria</label>
                         <div class="form-check form-check-blok">
                             <input class="form-check-input" type="radio" name="categoria" id="inlineRadio1"
-                                value="consumidor">
+                                value="consumidor" {{($cliente->categoria == "consumidor") ? "checked" : null }}>
                             <label class="form-check-label" for="inlineRadio1">Consumidor</label>
                         </div>
                         <div class="form-check form-check-blok">
                             <input class="form-check-input" type="radio" name="categoria" id="inlineRadio2"
-                                value="revenda">
+                                value="revenda" {{($cliente->categoria == "revenda") ? "checked" : null }}>
                             <label class="form-check-label" for="inlineRadio2">Revenda</label>
                         </div>
 
@@ -155,7 +155,7 @@
                     <div class="form-group col-md-2">
                         <label for>Cep</label>
                         <input type="text" class="form-control" name="cep" id="cep" placeholder="Cep"
-                            onchange="consultaCep()">
+                            onkeyup="consultaCep()" value="{{$cliente->cep ?? old('cep')}}" maxlength="9">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="">cidade</label>
