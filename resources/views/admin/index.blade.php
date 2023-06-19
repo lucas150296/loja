@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('config.css')}}">
@@ -29,9 +29,7 @@
                       <a class="dropdown-item" href="{{route('produto.create')}}">Fornecedores</a>
                     </div>
                   </li>
-                <li class="nav-item">
-                    <a class="nav-link" href link-nav="{{route('produto.index')}}">Produtos</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pedidos</a>
                 </li>
@@ -57,6 +55,9 @@
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href="#"><img src="imagens/clientes (1).png" class="" alt="">Fornecedores</a>
+                </li>
+                <li class="nav-item sub-menu">
+                    <a class="nav-link" href link-nav="{{route('produto.index')}}"><img src="{{asset('imagens/img-produtos.png')}}" alt=""> Produtos</a>
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href="#"><img src="imagens/serviços.png" alt=""> Serviços</a>
