@@ -26,6 +26,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                       <a class="dropdown-item" href="{{route('produto.create')}}">Produtos</a>
                       <a class="dropdown-item" href="{{route('cliente.create')}}">cliente</a>
+                      <a class="dropdown-item" href="{{route('loja.create')}}">Lojas</a>
                       <a class="dropdown-item" href="{{route('produto.create')}}">Fornecedores</a>
                     </div>
                   </li>
@@ -51,7 +52,7 @@
         <div class="collapse navbar-collapse nemuazul" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto ">
                 <li class="nav-item sub-menu  ">
-                    <a class="nav-link" href="#"><img src="imagens/clientes (1).png" class="" alt="">cliente</a>
+                    <a class="nav-link" href link-nav="{{route('cliente.index')}}"><img src="imagens/clientes (1).png" class="" alt="">cliente</a>
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href="#"><img src="imagens/clientes (1).png" class="" alt="">Fornecedores</a>

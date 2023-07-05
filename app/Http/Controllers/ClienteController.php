@@ -15,7 +15,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return view('cliente.index' , ['clientes' => $clientes]);
     }
 
     /**
@@ -38,7 +39,7 @@ class ClienteController extends Controller
     {
 
         Cliente::Create($request->all());
-        var_dump($request->all());
+        return redirect()->route('admin');
     }
 
     /**
@@ -72,7 +73,22 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+
+        $dados = $request->all();
+        if (isset($dados['cliente_inativo'])) {
+            # code...
+        } else {
+            $dados['cliente_inativo'] = '0' ;
+        };
+        if (isset($dados['venda_bloqueada'])) {
+            # code...
+        } else {
+            $dados['venda_bloqueada'] = '0' ;
+        };
+
+
+        $cliente->update($dados);
+        return redirect()->route('admin');
     }
 
     /**
@@ -83,6 +99,9 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+
+        $cliente->delete();
+        return redirect()->route('admin');
+
     }
 }

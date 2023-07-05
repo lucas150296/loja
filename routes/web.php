@@ -23,4 +23,5 @@ Route::get('/', 'IndexController@index')->name('home');
 Route::get('/admin', 'IndexController@admin')->name('admin');
 Route::resource('/produto', 'ProdutoController');
 Route::resource('/cliente', 'ClienteController');
+Route::resource('/loja', 'LojaController');
 

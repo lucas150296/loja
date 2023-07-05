@@ -108,11 +108,11 @@
                 <div class="form-group col-md-3">
                     <label for="">cidade</label>
                     <input type="text" class="form-control" id="cidade" name="cidade" placeholder="cidade"
-                        required>
+                        required value="{{$cliente->cidade ?? old('cidade')}}">
                 </div>
                 <div class="form-group col-md-1">
                     <label for="">estado</label>
-                    <input type="text" class="form-control" id="estado" name="estado" placeholder="estado">
+                    <input type="text" class="form-control" id="estado" name="estado" placeholder="estado" value="{{$cliente->estado ?? old('estado')}}">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="">Endereço</label>
@@ -159,21 +159,21 @@
                 <div class="form-check">
                     <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="1"
                         aria-label="..." name="cliente_inativo"
-                        @if (isset($clienete->id)) {{ $cliente->cliente_inativo == '1' ? 'checked' : null }} @endif><label
+                        @if (isset($cliente->id)) {{ $cliente->cliente_inativo == '1' ? 'checked' : null }} @endif><label
                         for="">Cliente
                         Inativo</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="1"
                         aria-label="..." name="venda_bloqueada"
-                        @if (isset($clinete->id)) {{ $cliente->venda_bloqueada == '1' ? 'checked' : null }} @endif><label
+                        @if (isset($cliente->id)) {{ $cliente->venda_bloqueada == '1' ? 'checked' : null }} @endif><label
                         for="">Venda
                         Bloqueada</label>
                 </div>
             </div>
             <div class="form-group">
                 <label for="">Outro</label>
-                <textarea class="form-control" name="outro" id="" cols="30" rows="3">{{ $cliente->outro ?? old('outro') }}</textarea>
+                <textarea class="form-control" name="outro" id="" cols="30" rows="3" >{{ $cliente->outro ?? old('outro') }}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary" style="margin: 5px">Salva</button>

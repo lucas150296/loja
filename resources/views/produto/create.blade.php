@@ -114,7 +114,7 @@
             <div class="col">
                 <label for="formGroupExampleInput">Data de fim da oferta</label>
                 <input name="data_f_oferta" type="date" class="form-control ofertas " placeholder="" disabled
-                    value="{{ $produto->data_f_oferta ?? old('data_f_oferta') }}">
+                    value="{{ $produto->data_f_oferta ?? old('data_f_oferta') }}" onchange="checarData(this.value)">
             </div>
         </div>
         <div class="row">

@@ -5,6 +5,7 @@
             <th scope="col">Cod</th>
             <th scope="col">Nome</th>
             <th scope="col">Estator</th>
+            <th scope="col">info+</th>
             <th scope="col">Edita</th>
             <th scope="col">Deleta</th>
         </tr>
@@ -22,6 +23,7 @@
                         desativo
                     @endif
                 </td>
+                <td><a href="">info+</a></td>
                 <td>
                     <a href="{{ route('produto.edit', ['produto' => $produto->id]) }}">Edita</a>
                 </td>

@@ -33,7 +33,35 @@ function consultaCep() {
         .then(json => {
             atualizar_cep(json)
         });
-
-
     ;
 }
+
+function checarOferta(valor) {
+    if (valor == 1) {
+        const valorDesconto = document.querySelector('input[name="valorDesconto"]')
+        valorDesconto.removeAttribute("disabled")
+        const data_f_oferta = document.querySelector('input[name="data_f_oferta"]')
+        data_f_oferta.removeAttribute("disabled")
+    } else {
+        const valorDesconto = document.querySelector('input[name="valorDesconto"]')
+        valorDesconto.setAttribute("disabled", "disabled")
+        valorDesconto.value = ""
+        const data_f_oferta = document.querySelector('input[name="data_f_oferta"]')
+        data_f_oferta.setAttribute("disabled", "disabled")
+        data_f_oferta.value = ""
+    }
+}
+function checarData(valor) {
+    var str = valor
+    var data = new Date(str.split('/').reverse().join('/'))
+    var dataAltua = new Date()
+    if (data > dataAltua) {
+        alert("data valida")
+    } else {
+        alert("A Data da oferta nao pode ser nemor  que a Data altual")
+        const data_f_oferta = document.querySelector('input[name="data_f_oferta"]')
+        data_f_oferta.value = ""
+    }
+}
+
+
