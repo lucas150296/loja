@@ -1,7 +1,7 @@
 @extends('admin._compomentes.base')
 @section('conteudo')
  <div class="conteudo cadastro-e-editar">
-    <form action="" method="post">
+    <form action="{{route('loja.store')}}" method="post">
         @csrf
         <label for="">Dados da Lojas</label>
         <div class="conteudo">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col">
                     <label for="">Telefone</label>
-                    <input type="number" name="Telefone" class="form-control" placeholder="Telefone" required value="{{$loja->Telefone ?? old('Telefone')}}">
+                    <input type="text" name="Telefone" class="form-control" placeholder="Telefone" required value="{{$loja->Telefone ?? old('Telefone')}}">
                 </div>
             </div>
             <!--linha-->
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col">
                     <label for="">Nome Fantasia</label>
-                    <input type="text" class="form-control" placeholder="Nome Fantasia" value="{{$loja->Nome_Fantasia ?? old('Nome_Fantasia')}}">
+                    <input type="text" class="form-control" name="Nome_Fantasia" placeholder="Nome Fantasia" value="{{$loja->Nome_Fantasia ?? old('Nome_Fantasia')}}">
                 </div>
             </div>
 

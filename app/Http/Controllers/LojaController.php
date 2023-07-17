@@ -35,7 +35,8 @@ class LojaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Loja::create($request->all());
+        return redirect()->route('admin');
     }
 
     /**

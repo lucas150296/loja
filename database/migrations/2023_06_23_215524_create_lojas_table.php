@@ -18,7 +18,7 @@ class CreateLojasTable extends Migration
             $table->string('Endereco', 100);
             $table->integer('Endereco_Numero');
             $table->string('Bairro', 100);
-            $table->integer('Telefone');
+            $table->string('Telefone', 20);
             $table->string('CNPJ', 100)->unique();
             $table->string('Cidade', 100);
             $table->string('Estados', 2);
