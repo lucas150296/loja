@@ -104,4 +104,9 @@ class ProdutoController extends Controller
         return redirect()->route('admin');
     }
 
+    public function busca(Request $request){
+
+
+
+    }
 }

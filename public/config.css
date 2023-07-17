@@ -129,3 +129,18 @@ nav{
 }.form-row{
     margin: 3px;
 }
+.login{
+
+    margin: 25%;
+    margin-top: 25%;
+    border: solid 1px black;
+    height: 50%;
+    width: 50%;
+    border-radius: 20px;
+}
+.login h2{
+    text-align: center;
+}
+.login form{
+    margin: 10px;
+}

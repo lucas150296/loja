@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\estoque;
 use App\Loja;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class LojaController extends Controller
      */
     public function index()
     {
-        //
+        $lojas = Loja::all();
+        return view('loja.index' , ['lojas' => $lojas]);
     }
 
     /**
@@ -35,7 +37,13 @@ class LojaController extends Controller
      */
     public function store(Request $request)
     {
-        Loja::create($request->all());
+        $loja  = Loja::create($request->all());
+
+        $estoque = new estoque();
+
+        $estoque->loja_id = $loja->id;
+        $estoque->save();
+
         return redirect()->route('admin');
     }
 

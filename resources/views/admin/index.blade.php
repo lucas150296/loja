@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Principal</a>
+                    <a class="nav-link" href="{{route('admin')}}">Principal</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -28,14 +28,15 @@
                       <a class="dropdown-item" href="{{route('cliente.create')}}">cliente</a>
                       <a class="dropdown-item" href="{{route('loja.create')}}">Lojas</a>
                       <a class="dropdown-item" href="{{route('produto.create')}}">Fornecedores</a>
+
                     </div>
                   </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pedidos</a>
+                    <a class="nav-link" href="{{route('pedido.index')}}">Pedidos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Relatório</a>
+                    <a class="nav-link" href link-nav="{{route('estoque.index')}}" >Estoques</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Financeiro</a>
@@ -59,6 +60,9 @@
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href link-nav="{{route('produto.index')}}"><img src="{{asset('imagens/img-produtos.png')}}" alt=""> Produtos</a>
+                </li>
+                <li class="nav-item sub-menu">
+                    <a class="nav-link" href link-nav="{{route('loja.index')}}"><img src="{{asset('imagens/lojas.jpg')}}" alt=""> Lojas</a>
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href="#"><img src="imagens/serviços.png" alt=""> Serviços</a>

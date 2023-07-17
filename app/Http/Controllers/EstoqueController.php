@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\estoque;
+use App\Loja;
 use Illuminate\Http\Request;
 
 class EstoqueController extends Controller
@@ -14,7 +15,9 @@ class EstoqueController extends Controller
      */
     public function index()
     {
-        //
+        $estoques = estoque::all();
+        $loja = Loja::all();
+        return view('estoque.index', ['estoques' => $estoques, 'lojas' => $loja]);
     }
 
     /**

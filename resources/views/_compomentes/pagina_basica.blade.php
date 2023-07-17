@@ -38,7 +38,7 @@
                         <li><a class="dropdown-item" href="https://www.lojaeliana.com.br/pl.php">PEDRO LEOPOLDO</a></li>
                       </ul>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">CLIENTES</a>
+                        <a class="nav-link active" aria-current="page" href="{{route('cliente.login')}}">CLIENTES</a>
                         <li class="nav-item">
                           <a class="nav-link active" aria-current="page" href="#">EQUIPE</a>
                         </li>
