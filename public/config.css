@@ -144,3 +144,9 @@ nav{
 .login form{
     margin: 10px;
 }
+.link_de_cadastro{
+    display: inline;
+    float: right;
+    margin-right: 5px;
+
+}

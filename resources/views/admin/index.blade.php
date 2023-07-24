@@ -68,7 +68,7 @@
                     <a class="nav-link" href="#"><img src="imagens/serviços.png" alt=""> Serviços</a>
                 </li>
                 <li class="nav-item sub-menu">
-                    <a class="nav-link" href="#"><img src="imagens/Usuário-HM.png" alt=""> Usuario</a>
+                    <a class="nav-link" href link-nav="{{route('funcionario.index')}}"><img src="imagens/Usuário-HM.png" alt=""> Usuario</a>
                 </li>
                 <li class="nav-item sub-menu">
                     <a class="nav-link" href="#"><img src="imagens/caixa.png" alt=""> Caixa</a>

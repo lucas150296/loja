@@ -29,8 +29,8 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" name="senha" placeholder="Senha">
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Clique em mim</label>
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="funcionario">
+                    <label class="form-check-label" for="exampleCheck1">Funcionário</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Entra</button>
             </form>

@@ -85,9 +85,9 @@ class PedidoController extends Controller
 
     public function buscaCliente(Request $request)
     {
-        $cliente = Cliente::where('documento', 'like', '%' . $request->get('cpf'))->first();
+        $cliente = Cliente::where('documento', 'like', '%' . $request->get('cpf'))->get()->first();
 
-        if (isset($cliente->id)) {
+        if (isset($cliente->id) && $cliente->id != '') {
             if ($cliente->cliente_inativo == 1) {
                 echo "<script>alert('Usuário inativo');</script>";
                 return view('pedido.index');

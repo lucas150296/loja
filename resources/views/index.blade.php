@@ -1,4 +1,4 @@
-@extends('_compomentes.pagina_basica', ['pagina' => $pagina])
+@extends('_compomentes.pagina_basica', ['pagina' => $pagina ])
 @section('conteudo')
     <div class="container">
 
