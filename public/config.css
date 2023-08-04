@@ -150,3 +150,8 @@ nav{
     margin-right: 5px;
 
 }
+.overflow-table {
+    max-height: 300px;
+    overflow-y: auto;
+}
+

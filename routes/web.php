@@ -47,7 +47,14 @@ Route::middleware(['autenticacao'])->group(function () {
     Route::delete('/estoque-produto/delete/{estoqueProduto}/{estoque}', 'EstoqueProdutoController@destroy')->name('estoqueProduto.destroy');
 
     Route::get('/pedido', 'PedidoController@index')->name('pedido.index');
-    Route::get('/pedido/create', 'PedidoController@create')->name('pedido.create');
     Route::get('/pedido/busca', 'PedidoController@buscaCliente')->name('pedido.busca');
+
+    Route::get('/pedido_produtos/create/{pedido}/{msg?}', 'PedidoProdutoController@create')->name('pedidoProduto.create');
+    Route::post('/pedido-produto/store/{pedido}', 'PedidoProdutoController@store')->name('pedidoProduto.store');
+
+    Route::put('/pedido-produto/-/{pedidoProduto}/{pedido}', 'PedidoProdutoController@altualizarProdutoMenos')->name('pedidoProduto.menos');
+    Route::put('/pedido-produto/+/{pedidoProduto}/{pedido}', 'PedidoProdutoController@altualizarProdutoMais')->name('pedidoProduto.mais');
+
+
     Route::resource('/funcionario', 'FuncionarioController');
 });

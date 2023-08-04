@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Funcionario;
 use App\Pedido;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,9 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, Pedido $pedido)
     {
+        var_dump($pedido);
     }
 
     /**
@@ -85,6 +87,7 @@ class PedidoController extends Controller
 
     public function buscaCliente(Request $request)
     {
+
         $cliente = Cliente::where('documento', 'like', '%' . $request->get('cpf'))->get()->first();
 
         if (isset($cliente->id) && $cliente->id != '') {
@@ -95,9 +98,26 @@ class PedidoController extends Controller
                 echo "<script>alert('Usuário bloqueado');</script>";
                 return view('pedido.index');
             } else {
+
+                $funciomario = Funcionario::where('id', 'like', '%' . $_SESSION['id'])->get()->first();
                 $pedido = new Pedido;
                 $pedido->cliente_id = $cliente->id;
-                return view('pedido.create', ['cliente' => $cliente]);
+                $pedido->loja_id = $funciomario->loja_id;
+
+                $tamanhoSenha = 10;
+
+                $caracteresPermitidos = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#';
+
+                $senha = '';
+                for ($i = 0; $i < $tamanhoSenha; $i++) {
+                    $senha .= $caracteresPermitidos[rand(0, strlen($caracteresPermitidos) - 1)];
+                }
+
+                $pedido->senha_de_autorizacao = $senha;
+
+                $pedido->save();
+
+                return redirect()->route('pedidoProduto.create' , ['pedido' => $pedido->id]);
             }
         } else {
             echo "<script>alert('Usuário não localizado');</script>";

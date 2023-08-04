@@ -17,11 +17,11 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->string('senha_de_autorizacao', 100);
             $table->unsignedBigInteger('cliente_id');
-            $table->string('valor_pedido', 100);
+            $table->float('valor_pedido')->nullable()->default(0.0);
             $table->unsignedBigInteger('loja_id');
-            $table->string('status', 1)->default('0');
-            $table->string('tipo_pagamento', 1)->default('0');
-            $table->string('tipo_entrega', 1)->nullable()->default('0');
+            $table->integer('status')->default('0');
+            $table->integer('tipo_pagamento')->default('0');
+            $table->integer('tipo_entrega')->nullable()->default(0);
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('loja_id')->references('id')->on('lojas');
             $table->timestamps();

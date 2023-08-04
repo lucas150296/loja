@@ -9,6 +9,7 @@ document.querySelectorAll('[link-nav]').forEach(link => {
             .then(html => conteudo.innerHTML = html)
     }
 })
+
 function limpa_form_cep() {
     document.getElementById('cidade').value = ("")
     document.getElementById('estado').value = ("")
