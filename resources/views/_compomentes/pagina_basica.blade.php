@@ -53,10 +53,10 @@
 
                                         @if (isset($usuario->nome) && $usuario->nome != '')
                                             <a class="nav-link active" aria-current="page"
-                                                href="{{ route('cliente.sair') }}">Sair</a>
+                                                href="{{ route('login.sair') }}">Sair</a>
                                         @else
                                             <a class="nav-link active" aria-current="page"
-                                                href="{{ route('cliente.login') }}">Entra</a>
+                                                href="{{ route('login.login') }}">Entra</a>
                                         @endif
 
                                     <li class="nav-item">

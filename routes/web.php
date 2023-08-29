@@ -1,8 +1,6 @@
 <?php
 
-use App\estoque;
-use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\ProdutoController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,9 +23,9 @@ Route::get('/', 'IndexController@index')->name('home');
 
 
 
-Route::get('/login', 'ClienteController@loginIndex')->name('cliente.login');
-Route::post('/login', 'ClienteController@login')->name('cliente.login');
-Route::get('/sair', 'ClienteController@sair')->name('cliente.sair');
+Route::get('/login', 'LoginController@loginIndex')->name('login.login');
+Route::post('/login', 'LoginController@login')->name('login.login');
+Route::get('/sair', 'LoginController@sair')->name('login.sair');
 
 
 
@@ -55,6 +53,13 @@ Route::middleware(['autenticacao'])->group(function () {
     Route::put('/pedido-produto/-/{pedidoProduto}/{pedido}', 'PedidoProdutoController@altualizarProdutoMenos')->name('pedidoProduto.menos');
     Route::put('/pedido-produto/+/{pedidoProduto}/{pedido}', 'PedidoProdutoController@altualizarProdutoMais')->name('pedidoProduto.mais');
 
+    Route::put('/pedido-finaliza/{pedido}', 'PedidoController@finalizarPedido')->name('pedido.finalizar');
+    Route::delete('/pedido-delete/{pedido}', 'PedidoController@destroy')->name('pedido.destroy');
 
     Route::resource('/funcionario', 'FuncionarioController');
+
+    Route::get('/caixa', 'CaixaController@index')->name('caixa');
+
+    Route::get('/pre-venda/{cpf}', 'PreVendaController@busca')->name('pre-venda.busca');
+
 });

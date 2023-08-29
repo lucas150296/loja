@@ -12,6 +12,6 @@ class Cliente extends Model
     ];
 
     public function pedidos(){
-        return $this->hasMany('App\Pedido', 'cliente->id' , 'id');
+        return $this->hasMany('App\Pedido');
     }
 }

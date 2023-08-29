@@ -65,4 +65,24 @@ function checarData(valor) {
     }
 }
 
+function preVenda() {
+    let text;
+    let person = prompt('Digite o Cpf do cliente');
+    if (person == null || person == "") {
+        text = "Operação cancelada pelo operado";
+        alert(text);
+    } else {
+        const lista = document.getElementById('lista')
+
+        console.log(person)
+        let cpf = person
+
+
+        fetch("/pre-venda/" + cpf)
+            .then(resp => resp.text())
+            .then(html => lista.innerHTML = html)
+    }
+}
+
+
 

@@ -24,6 +24,8 @@ class CreatePedidosTable extends Migration
             $table->integer('tipo_entrega')->nullable()->default(0);
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('loja_id')->references('id')->on('lojas');
+            $table->unsignedBigInteger('fucionario_id');
+            $table->foreign('cliente_id')->references('id')->on('fucionarios');
             $table->timestamps();
         });
         Schema::create('pedidos_produtos', function (Blueprint $table) {

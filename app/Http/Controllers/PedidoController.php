@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\EstoqueProduto;
 use App\Funcionario;
 use App\Pedido;
+use App\PedidoProduto;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -16,7 +18,11 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        return view('pedido.index');
+
+
+        $funcionario = Funcionario::where('id', 'like', '%' . $_SESSION['id'])->get()->first();
+        $pedidos = Pedido::all();
+        return view('pedido.index', ['pedidos' => $pedidos, 'funcionario' => $funcionario]);
     }
 
     /**
@@ -26,7 +32,6 @@ class PedidoController extends Controller
      */
     public function create(Request $request, Pedido $pedido)
     {
-        var_dump($pedido);
     }
 
     /**
@@ -82,7 +87,20 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+        foreach ($pedido->produtos as $key => $pedidoProduto) {
+            $estoque = EstoqueProduto::where('produto_id', 'like', '%' . $pedidoProduto->produto_id)->get()->first();
+            $dado['quantidade'] = $estoque->quantidade + $pedidoProduto->pivot->quantidade;
+
+            $estoque->update($dado);
+        };
+
+        $pedidoProduto = PedidoProduto::where('pedido_id', 'like', '%' .$pedido->id);
+
+        $pedidoProduto->delete();
+
+        $pedido->delete();
+
+        return redirect()->route('admin');
     }
 
     public function buscaCliente(Request $request)
@@ -117,11 +135,20 @@ class PedidoController extends Controller
 
                 $pedido->save();
 
-                return redirect()->route('pedidoProduto.create' , ['pedido' => $pedido->id]);
+                return redirect()->route('pedidoProduto.create', ['pedido' => $pedido->id]);
             }
         } else {
             echo "<script>alert('Usuário não localizado');</script>";
             return view('pedido.index');
         }
+    }
+
+    public function finalizarPedido(Pedido $pedido)
+    {
+        $pedido->status = 1;
+
+        $pedido->update();
+
+        return redirect()->route('admin');
     }
 }

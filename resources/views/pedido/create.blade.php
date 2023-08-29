@@ -26,7 +26,6 @@
         </form>
     </div>
 
-
     <label for="" style="margin: 5px">Dados do cliente pedido </label>
     <div class="conteudo">
         <div class="form-row">
@@ -56,7 +55,7 @@
 
         </div>
     </div>
-
+    <label for="" style="margin: 5px">Produto do pedido</label>
     <div class="conteudo overflow-table ">
         <table class="table">
             <thead>
@@ -76,7 +75,7 @@
                         <td>{{ $produto->nome }}</td>
                         <td>
                             <form id="form.menos_{{ $produto->pivot->id }}"
-                                action="{{ route('pedidoProduto.menos', ['pedidoProduto' => $produto->pivot->id , 'pedido' => $pedido->id]) }}"
+                                action="{{ route('pedidoProduto.menos', ['pedidoProduto' => $produto->pivot->id, 'pedido' => $pedido->id]) }}"
                                 method="post">
                                 @method('PUT')
                                 @csrf
@@ -84,7 +83,7 @@
                                     onclick="document.getElementById('form.menos_{{ $produto->pivot->id }}').submit()">-</a>
                             </form> {{ $produto->pivot->quantidade }}
                             <form id="form.mais_{{ $produto->pivot->id }}"
-                                action="{{ route('pedidoProduto.mais', ['pedidoProduto' => $produto->pivot->id , 'pedido' => $pedido->id]) }}"
+                                action="{{ route('pedidoProduto.mais', ['pedidoProduto' => $produto->pivot->id, 'pedido' => $pedido->id]) }}"
                                 method="post">
                                 @method('PUT')
                                 @csrf
@@ -108,5 +107,25 @@
     <div class="conteudo">
         <h3>Total:</h3>
         <samp>{{ $english_format_number = number_format($pedido->valor_pedido, 2, ',', '') }}</samp>
+    </div>
+
+    <div class="conteudo">
+        <div class="btn-group centro" role="group" aria-label="Exemplo básico">
+
+            <form action="{{ route('pedido.finalizar', ['pedido' => $pedido->id]) }}" method="POST">
+                @method('PUT')
+                @csrf
+                <button type="submit" class="btn btn-secondary">Finalizar</button>
+
+            </form>
+
+            <form action="{{ route('pedido.destroy', ['pedido' => $pedido->id]) }}" method="post">
+                @method('DELETE')
+                @csrf
+                <button type="submit" class="btn btn-secondary">Deletado</button>
+            </form>
+
+
+        </div>
     </div>
 @endsection

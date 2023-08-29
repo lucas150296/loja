@@ -15,7 +15,7 @@
 
     <div class="login">
         <h2>Login</h5>
-            <form action="{{route('cliente.login')}}" method="POST" >
+            <form action="{{route('login.login')}}" method="POST" >
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Endereço de email</label>

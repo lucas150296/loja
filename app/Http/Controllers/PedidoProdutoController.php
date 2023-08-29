@@ -49,16 +49,17 @@ class PedidoProdutoController extends Controller
 
         if (isset($produto->nome) && $produto->nome != '') {
             foreach ($pedido->loja->estoque->produtos as $produto) {
+                $pedidoProduto = new PedidoProduto;
+                $pedidoProduto->pedido_id = $pedido->id;
+                $pedidoProduto->quantidade = $request->get('quantidade');
+                if ($pedidoProduto->quantidade == "") {
+                    $pedidoProduto->quantidade = 1;
+                }
                 if ($produto->codigo == $request->input('cod-produto')) {
-                    if ($produto->pivot->quantidade >= $request->input('quantidade')) {
+                    if ($produto->pivot->quantidade >= $pedidoProduto->quantidade) {
 
-                        $pedidoProduto = new PedidoProduto;
 
-                        $pedidoProduto->pedido_id = $pedido->id;
-                        $pedidoProduto->quantidade = $request->get('quantidade');
-                        if ($pedidoProduto->quantidade == "") {
-                            $pedidoProduto->quantidade = 1;
-                        }
+
                         $pedidoProduto->produto_id = $produto->id;
                         $pedidoProduto->save();
                         $sob_valor['valor_pedido'] = 0;
@@ -67,10 +68,11 @@ class PedidoProdutoController extends Controller
                         }
 
 
-                        $estoque = EstoqueProduto::where('id', 'like', '%' . $produto->pivot->id);
-                        $dado['quantidade'] = $produto->pivot->quantidade - $request->input('quantidade');
+                        $estoque = EstoqueProduto::where('produto_id', 'like', '%' . $pedidoProduto->produto_id)->get()->first();
+                        $dado['quantidade'] = $estoque->quantidade - $pedidoProduto->quantidade;
 
                         $estoque->update($dado);
+
                         $pedido->update($sob_valor);
 
 

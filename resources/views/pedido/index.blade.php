@@ -12,7 +12,27 @@
                 <button type="submit">Novo pedido</button>
             </div>
         </form>
-
     </div>
     <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Status</th>
+              <th scope="col">Abri</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($pedidos as $key => $pedido)
+            <tr>
+                <th scope="row">{{$key + 1 }}</th>
+                <td>{{$pedido->cliente->nome}}</td>
+                <td>{{$pedido->status}}</td>
+                <td><a href="{{route('pedidoProduto.create' , ['pedido' => $pedido->id])}}">pedido</a></td>
+              </tr>
+            @endforeach
+          </tbody>
+    </table>
 @endsection
